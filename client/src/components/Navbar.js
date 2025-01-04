@@ -1,33 +1,56 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { CTAButton } from './CTA-button';
+import { jwtDecode } from 'jwt-decode';
 import '../styles/Navbar-css.css';
+import { CTAButton } from './CTA-button';
+import SignUpForm from './SignUpForm';  // Import the SignUpForm component
 
 const Navbar = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
-
+  const [showSignUpModal, setShowSignUpModal] = useState(false);  // New state for SignUp Modal
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const navigate = useNavigate();
+
+  // Check if token is valid or expired
+  const checkTokenValidity = () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        const currentTime = Date.now() / 1000;
+        if (decoded.exp < currentTime) {
+          localStorage.removeItem('token');
+          setIsAuthenticated(false);
+        } else {
+          setIsAuthenticated(true);
+        }
+      } catch (err) {
+        console.error('Token decode error:', err);
+        localStorage.removeItem('token');
+        setIsAuthenticated(false);
+      }
+    }
+  };
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) setIsAuthenticated(true);
+    checkTokenValidity();
   }, []);
 
+  // Handle login request
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('https://api.example.com/login', {
+      const response = await fetch('http://localhost:5000/backend/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
-
       const data = await response.json();
       if (data.success) {
         setIsAuthenticated(true);
@@ -35,6 +58,7 @@ const Navbar = () => {
         setError('');
         localStorage.setItem('token', data.token);
         setShowLoginModal(false);
+        navigate('/dashboard');
       } else {
         setError(data.message || 'Login failed!');
       }
@@ -43,9 +67,11 @@ const Navbar = () => {
     }
   };
 
+  // Handle logout
   const handleLogout = () => {
     localStorage.removeItem('token');
     setIsAuthenticated(false);
+    navigate('/');
   };
 
   return (
@@ -81,6 +107,12 @@ const Navbar = () => {
                 >
                   Login
                 </button>
+                <button
+                  className="btn btn-secondary me-2"
+                  onClick={() => setShowSignUpModal(true)}  // Open sign-up modal
+                >
+                  Signup
+                </button>
                 <CTAButton to="#" text="Get Started" />
               </>
             ) : (
@@ -92,8 +124,9 @@ const Navbar = () => {
         </div>
       </nav>
 
+      {/* Login Modal */}
       {showLoginModal && (
-        <div className="modal">
+        <div className="modal" style={{ display: 'block' }}>
           <div className="modal-content">
             <h2 className="mb-4">Login</h2>
             <form onSubmit={handleLogin} className="login-form">
@@ -128,6 +161,23 @@ const Navbar = () => {
                 Cancel
               </button>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* Sign Up Modal */}
+      {showSignUpModal && (
+        <div className="modal" style={{ display: 'block' }}>
+          <div className="modal-content">
+            <h2 className="mb-4">Sign Up</h2>
+            <SignUpForm /> {/* Render the step-by-step sign-up form here */}
+            <button
+              type="button"
+              className="btn btn-secondary w-100"
+              onClick={() => setShowSignUpModal(false)}
+            >
+              Cancel
+            </button>
           </div>
         </div>
       )}
