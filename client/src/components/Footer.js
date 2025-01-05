@@ -1,4 +1,4 @@
-import React from 'react';
+ import React from 'react';
 import './Footer.css';
 import { Link } from 'react-router-dom';
 /**
@@ -33,11 +33,12 @@ const Footer = () => {
           </ul>
         </div>
         <div className="footer-section cta">
-          <h2>Get in Touch</h2>
-          <p>Subscribe to our newsletter to stay updated on our latest news and offers.</p>
+          <h2>Input</h2>
+          <p>Email Here</p>
           <form>
             <input type="email" placeholder="Enter your email" />
-            <button type="submit">Subscribe</button>
+            <button type="submit">Submit</button>
+            
           </form>
         </div>
       </div>

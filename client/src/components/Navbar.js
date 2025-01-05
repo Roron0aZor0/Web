@@ -78,7 +78,7 @@ const Navbar = () => {
     <>
       <nav className="navbar navbar-expand-lg">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/">MyApp</Link>
+          <Link className="navbar-brand" to="/">I-Tech</Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -93,9 +93,9 @@ const Navbar = () => {
           <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
-              <li className="nav-item"><Link className="nav-link" to="/how-it-works">How It Works</Link></li>
-              <li className="nav-item"><Link className="nav-link" to="/pricing">Pricing</Link></li>
-              <li className="nav-item"><Link className="nav-link" to="/faq">FAQ</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/how-it-works">Courses</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/pricing">About us</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/faq">Contact</Link></li>
             </ul>
           </div>
           <div className="d-flex">
