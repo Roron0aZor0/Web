@@ -1,13 +1,32 @@
 import React from 'react';
+import { FaCode, FaLaptop, FaChalkboardTeacher } from 'react-icons/fa';
 import './hero.css';
-import { CTAButton } from './CTA-button';
+
 const Hero = () => {
     return (
         <section className="hero">
-            <div className="hero-content">
-                <h1 className="hero-heading">Create Stunning Websites with AI in Minutes!</h1>
-                <p className="hero-subtext">No coding. No hassle. Just smarter, faster, and more beautiful websites for your business.</p>
-                <CTAButton to="/get-started" text="Get Started" className="cta-button-large" />
+            <div className="container text-center">
+                <h1 className="hero-title">Empowering Future Coders</h1>
+                <p className="hero-subtitle">
+                    Master programming languages and essential skills with I Tech.
+                </p>
+
+                <div className="hero-icons">
+                    <div className="icon-box">
+                        <FaCode size={50} />
+                    </div>
+                    <div className="icon-box">
+                        <FaLaptop size={50} />
+                    </div>
+                    <div className="icon-box">
+                        <FaChalkboardTeacher size={50} />
+                    </div>
+                </div>
+
+                <div className="hero-buttons">
+                    <a href="/courses" className="btn btn-primary">Explore Courses</a>
+                    <a href="/signup" className="btn btn-outline-light">Get Started</a>
+                </div>
             </div>
         </section>
     );

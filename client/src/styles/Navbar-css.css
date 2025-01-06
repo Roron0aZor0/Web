@@ -1,101 +1,204 @@
+/* Navbar container */
 .navbar {
-    background-color: lightcyan;
-    color: black;
-    
+  background-color:#fff;  /* Dark color for a professional look */
+  padding: 15px 0;
 }
 
-.navbar .navbar-brand,
-.navbar .nav-link {
-    color: black;
+/* Navbar links */
+.navbar-nav .nav-item .nav-link {
+  color: #333 !important; /* Light color for text */
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 15px;
+  transition: all 0.3s ease;
 }
 
-.navbar .nav-link:hover {
-    color: #ff6600;
+.navbar-nav .nav-item .nav-link:hover {
+  color: #007BFF !important;  /* Highlight color on hover */
+  text-decoration: none;
 }
 
-.navbar .btn-outline-primary {
-    color: black;
-    border-color: black;
+/* Navbar brand (logo) */
+.navbar-brand {
+  color: #333;
+  font-size: 32px;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-.navbar .btn-outline-primary:hover {
-    background-color: #ff6600;
-    border-color: #ff6600;
+/* Toggler button for mobile */
+.navbar-toggler-icon {
+  background-color: #ECF0F1;
 }
 
-.navbar .btn-primary {
-    background-color: #ff6600;
-    border-color: #ff6600;
-}
-
-.navbar .btn-primary:hover {
-    background-color: #e65c00;
-    border-color: #e65c00;
-}
-/* Ensure the modal doesn't affect other elements */
-.modal {
-  position: fixed;  /* Fixes the modal to the viewport */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);  /* Semi-transparent background */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1050;  /* Ensure modal is above other content */
-}
-
-/* Modal content styling */
-.modal-content {
-  background-color: white;
-  padding: 30px;
-  border-radius: 8px;
-  width: 100%;
-  max-width: 500px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  position: relative;
-}
-
-/* Optional: Close button styling (if needed) */
-.modal-close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
+/* Dropdown styling */
+.dropdown-toggle {
+  background-color: #007BFF;  /* Button background color */
+  color: #fff;  /* Ensure text is visible */
   border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 15px;
+  border-radius: 30px;
+  transition: all 0.3s ease;
 }
 
+.dropdown-toggle:hover {
+  background-color: #0056b3;
+}
+
+.dropdown-menu {
+  background-color: #2C3E50;  /* Dark background for the dropdown */
+  border-radius: 5px;
+  min-width: 180px;
+}
+
+.dropdown-item {
+  color: #ECF0F1; /* Ensure text is light */
+  font-size: 16px;
+  padding: 10px 15px;
+}
+
+.dropdown-item:hover {
+  background-color: #007BFF;
+  color: #fff;
+}
+
+/* Button Styling */
+.btn-outline-primary {
+  border-color: #007BFF;
   
-  .modal h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #007BFF;
-  }
-  
-  .form-group input {
-    border-radius: 5px;
-    border: 1px solid #ced4da;
-    padding: 10px;
-    width: 100%;
-    outline: none;
-  }
-  
-  .btn {
-    border-radius: 5px;
-  }
-  
-  .btn:hover {
-    opacity: 0.9;
-  }
-  
-  .alert {
-    margin-top: 10px;
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 0.9rem;
-  }
-  
-  
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 30px;
+  padding: 8px 16px;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+  background-color: #007BFF;
+  color: #fff;
+}
+
+.btn-secondary {
+  background-color: #7F8C8D;
+  color: #fff;
+  border-radius: 30px;
+  padding: 8px 16px;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #5F6A6A;
+}
+
+.btn-danger {
+  background-color: #E74C3C;
+  color: #fff;
+  border-radius: 30px;
+  padding: 8px 16px;
+  transition: all 0.3s ease;
+}
+
+.btn-danger:hover {
+  background-color: #C0392B;
+}
+
+.modal-content {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: #2C3E50;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.form-control {
+  border-radius: 5px;
+  border: 1px solid #BDC3C7;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.form-control:focus {
+  border-color: #007BFF;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.alert {
+  border-radius: 5px;
+}
+
+/* Modal content */
+.modal-content {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+/* Modal Header */
+.modal-header {
+  color: #2C3E50;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Modal Form */
+.modal-form .form-group input {
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #BDC3C7;
+  width: 100%;
+}
+
+.modal-form .form-group input:focus {
+  border-color: #007BFF;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+.modal-form .btn {
+  border-radius: 30px;
+  font-weight: 500;
+  padding: 12px 20px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.modal-form .btn-primary {
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+}
+
+.modal-form .btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.modal-form .btn-secondary {
+  background-color: #7F8C8D;
+  color: #fff;
+  border: none;
+}
+
+.modal-form .btn-secondary:hover {
+  background-color: #5F6A6A;
+}
+
+.alert {
+  margin-bottom: 15px;
+  border-radius: 8px;
+}

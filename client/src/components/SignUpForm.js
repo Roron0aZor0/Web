@@ -44,10 +44,10 @@ const SignUpForm = () => {
       console.error('Error during signup:', error);
     }
   };
-  
 
   return (
-    <div className="signup-form">
+    <div className="modal-content">
+      <h2 className="modal-header">Create Your Account</h2>
       <form onSubmit={handleSubmit}>
         {/* Step 1: Basic Information */}
         {step === 1 && (
@@ -60,6 +60,7 @@ const SignUpForm = () => {
               value={formData.name}
               onChange={handleChange}
               required
+              className="form-control"
             />
             <label>Email:</label>
             <input
@@ -68,6 +69,7 @@ const SignUpForm = () => {
               value={formData.email}
               onChange={handleChange}
               required
+              className="form-control"
             />
             <label>Password:</label>
             <input
@@ -76,9 +78,10 @@ const SignUpForm = () => {
               value={formData.password}
               onChange={handleChange}
               required
+              className="form-control"
             />
             <div>
-              <button type="button" onClick={nextStep}>Next</button>
+              <button type="button" onClick={nextStep} className="btn btn-primary">Next</button>
             </div>
           </div>
         )}
@@ -94,6 +97,7 @@ const SignUpForm = () => {
               value={formData.companyName}
               onChange={handleChange}
               required
+              className="form-control"
             />
             <label>Industry:</label>
             <input
@@ -102,10 +106,11 @@ const SignUpForm = () => {
               value={formData.industry}
               onChange={handleChange}
               required
+              className="form-control"
             />
             <div>
-              <button type="button" onClick={prevStep}>Back</button>
-              <button type="button" onClick={nextStep}>Next</button>
+              <button type="button" onClick={prevStep} className="btn btn-secondary">Back</button>
+              <button type="button" onClick={nextStep} className="btn btn-primary">Next</button>
             </div>
           </div>
         )}
@@ -121,6 +126,7 @@ const SignUpForm = () => {
               value={formData.website}
               onChange={handleChange}
               required
+              className="form-control"
             />
             <label>Preferred Color Scheme:</label>
             <input
@@ -130,6 +136,7 @@ const SignUpForm = () => {
               onChange={handleChange}
               placeholder="e.g., Blue, Green"
               required
+              className="form-control"
             />
             <label>Template Type:</label>
             <select
@@ -137,6 +144,7 @@ const SignUpForm = () => {
               value={formData.template}
               onChange={handleChange}
               required
+              className="form-control"
             >
               <option value="">Select Template</option>
               <option value="business">Business</option>
@@ -145,8 +153,8 @@ const SignUpForm = () => {
               <option value="ecommerce">E-commerce</option>
             </select>
             <div>
-              <button type="button" onClick={prevStep}>Back</button>
-              <button type="button" onClick={nextStep}>Next</button>
+              <button type="button" onClick={prevStep} className="btn btn-secondary">Back</button>
+              <button type="button" onClick={nextStep} className="btn btn-primary">Next</button>
             </div>
           </div>
         )}
@@ -163,8 +171,8 @@ const SignUpForm = () => {
             <p><strong>Color Scheme:</strong> {formData.colorScheme}</p>
             <p><strong>Template Type:</strong> {formData.template}</p>
             <div>
-              <button type="button" onClick={prevStep}>Back</button>
-              <button type="submit">Submit</button>
+              <button type="button" onClick={prevStep} className="btn btn-secondary">Back</button>
+              <button type="submit" className="btn btn-primary">Submit</button>
             </div>
           </div>
         )}

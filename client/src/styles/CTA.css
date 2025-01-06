@@ -1,0 +1,35 @@
+.cta-section {
+    background-color: #007bff; /* Blue background for emphasis */
+    color: white; /* White text for contrast */
+    text-align: center;
+    padding: 40px 20px;
+    margin-top: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cta-section h3 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  .cta-section p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+  
+  .cta-section .btn-primary {
+    background-color: #ffcc00; /* Eye-catching yellow button */
+    color: #333;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+  }
+  
+  .cta-section .btn-primary:hover {
+    background-color: #e6b800; /* Slightly darker yellow on hover */
+    color: #fff;
+  }
+  

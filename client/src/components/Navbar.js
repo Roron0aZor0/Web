@@ -4,15 +4,14 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { jwtDecode } from 'jwt-decode';
 import '../styles/Navbar-css.css';
-import { CTAButton } from './CTA-button';
-import SignUpForm from './SignUpForm';  // Import the SignUpForm component
 
 const Navbar = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
-  const [showSignUpModal, setShowSignUpModal] = useState(false);  // New state for SignUp Modal
+  const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState(''); // For confirm password in signup
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const navigate = useNavigate();
@@ -67,6 +66,32 @@ const Navbar = () => {
     }
   };
 
+  // Handle sign up request
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      setError('Passwords do not match!');
+      return;
+    }
+    try {
+      const response = await fetch('http://localhost:5000/backend/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await response.json();
+      if (data.success) {
+        setSuccess('Account created successfully!');
+        setError('');
+        setShowSignUpModal(false);
+      } else {
+        setError(data.message || 'Sign Up failed!');
+      }
+    } catch (err) {
+      setError('An error occurred while signing up.');
+    }
+  };
+
   // Handle logout
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -76,7 +101,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg">
+      <nav className="navbar navbar-expand-lg ">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">I-Tech</Link>
           <button
@@ -93,28 +118,26 @@ const Navbar = () => {
           <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
-              <li className="nav-item"><Link className="nav-link" to="/how-it-works">Courses</Link></li>
-              <li className="nav-item"><Link className="nav-link" to="/pricing">About us</Link></li>
-              <li className="nav-item"><Link className="nav-link" to="/faq">Contact</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/courses">Courses</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/about">About us</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/contact">Contact</Link></li>
             </ul>
           </div>
           <div className="d-flex">
             {!isAuthenticated ? (
-              <>
-                <button
-                  className="btn btn-outline-primary me-2"
-                  onClick={() => setShowLoginModal(true)}
-                >
-                  Login
+              <div className="dropdown">
+                <button className="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                  Login / Sign Up
                 </button>
-                <button
-                  className="btn btn-secondary me-2"
-                  onClick={() => setShowSignUpModal(true)}  // Open sign-up modal
-                >
-                  Signup
-                </button>
-                <CTAButton to="#" text="Get Started" />
-              </>
+                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <li>
+                    <button className="dropdown-item" onClick={() => setShowLoginModal(true)}>Login</button>
+                  </li>
+                  <li>
+                    <button className="dropdown-item" onClick={() => setShowSignUpModal(true)}>Sign Up</button>
+                  </li>
+                </ul>
+              </div>
             ) : (
               <button className="btn btn-danger" onClick={handleLogout}>
                 Logout
@@ -128,13 +151,13 @@ const Navbar = () => {
       {showLoginModal && (
         <div className="modal" style={{ display: 'block' }}>
           <div className="modal-content">
-            <h2 className="mb-4">Login</h2>
-            <form onSubmit={handleLogin} className="login-form">
+            <h2 className="modal-header">Login to Your Account</h2>
+            <form onSubmit={handleLogin} className="modal-form">
               <div className="form-group mb-3">
                 <input
                   type="email"
                   className="form-control"
-                  placeholder="Email"
+                  placeholder="Email Address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -152,32 +175,66 @@ const Navbar = () => {
               </div>
               {error && <div className="alert alert-danger">{error}</div>}
               {success && <div className="alert alert-success">{success}</div>}
-              <button type="submit" className="btn btn-primary w-100 mb-2">Login</button>
+              <button type="submit" className="btn btn-primary w-100 mb-3">Login</button>
               <button
                 type="button"
                 className="btn btn-secondary w-100"
                 onClick={() => setShowLoginModal(false)}
               >
-                Cancel
+                Close
               </button>
             </form>
           </div>
         </div>
       )}
 
-      {/* Sign Up Modal */}
+      {/* SignUp Modal */}
       {showSignUpModal && (
         <div className="modal" style={{ display: 'block' }}>
           <div className="modal-content">
-            <h2 className="mb-4">Sign Up</h2>
-            <SignUpForm /> {/* Render the step-by-step sign-up form here */}
-            <button
-              type="button"
-              className="btn btn-secondary w-100"
-              onClick={() => setShowSignUpModal(false)}
-            >
-              Cancel
-            </button>
+            <h2 className="modal-header">Create Your Account</h2>
+            <form onSubmit={handleSignUp} className="modal-form">
+              <div className="form-group mb-3">
+                <input
+                  type="email"
+                  className="form-control"
+                  placeholder="Email Address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="form-group mb-3">
+                <input
+                  type="password"
+                  className="form-control"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="form-group mb-3">
+                <input
+                  type="password"
+                  className="form-control"
+                  placeholder="Confirm Password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                />
+              </div>
+              {error && <div className="alert alert-danger">{error}</div>}
+              {success && <div className="alert alert-success">{success}</div>}
+              <button type="submit" className="btn btn-primary w-100 mb-3">Sign Up</button>
+              <button
+                type="button"
+                className="btn btn-secondary w-100"
+                onClick={() => setShowSignUpModal(false)}
+              >
+                Close
+              </button>
+            </form>
           </div>
         </div>
       )}
